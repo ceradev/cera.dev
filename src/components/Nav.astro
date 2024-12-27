@@ -7,17 +7,16 @@ import type { iconPaths } from './IconPaths';
 const textLinks: { label: string; href: string }[] = [
 	{ label: 'Home', href: '/' },
 	{ label: 'Work', href: '/work/' },
+	{ label: 'Career', href: '/career/' },
 	{ label: 'About', href: '/about/' },
 ];
 
 /** Icon links to social media — edit these with links to your profiles! */
 const iconLinks: { label: string; href: string; icon: keyof typeof iconPaths }[] = [
-	{ label: 'Twitter', href: 'https://twitter.com/me', icon: 'twitter-logo' },
-	{ label: 'Twitch', href: 'https://twitch.tv/me', icon: 'twitch-logo' },
 	{ label: 'GitHub', href: 'https://github.com/me', icon: 'github-logo' },
 	{ label: 'CodePen', href: 'https://codepen.io/me', icon: 'codepen-logo' },
 	{ label: 'dribbble', href: 'https://dribbble.com/me', icon: 'dribbble-logo' },
-	{ label: 'YouTube', href: 'https://www.youtube.com/@me/', icon: 'youtube-logo' },
+	{ label: 'LinkedIn', href: 'https://linkedin.com/in/me', icon: 'linkedin-logo' },
 ];
 ---
 
@@ -176,6 +175,12 @@ const iconLinks: { label: string; href: string; icon: keyof typeof iconPaths }[]
 		line-height: 1.1;
 		color: var(--gray-0);
 		text-decoration: none;
+		transition: color var(--theme-transition);
+	}
+
+	.site-title:hover,
+	.site-title:focus {
+		color: var(--accent-regular);
 	}
 
 	.menu-button {
@@ -268,7 +273,7 @@ const iconLinks: { label: string; href: string; icon: keyof typeof iconPaths }[]
 
 	.social:hover,
 	.social:focus {
-		color: var(--accent-text-over);
+		color: var(--accent-regular);
 	}
 
 	.theme-toggle {

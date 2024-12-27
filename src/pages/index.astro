@@ -30,19 +30,19 @@ const projects = (await getCollection('work'))
 		<div class="wrapper stack gap-8 lg:gap-20">
 			<header class="hero">
 				<Hero
-					title="Hello, my name is Jeanine White"
-					tagline="I am a Creative Developer who is currently based in Portland, Oregon."
+					title="Hi, I'm César A. Suárez Orizondo"
+					tagline="I am a software developer, singer, and writer based in Tenerife, Spain."
 					align="start"
 				>
 					<div class="roles">
-						<Pill><Icon icon="code" size="1.33em" /> Developer</Pill>
-						<Pill><Icon icon="microphone-stage" size="1.33em" /> Speaker</Pill>
+						<Pill><Icon icon="code" size="1.33em" /> Developer </Pill>
+						<Pill><Icon icon="microphone-stage" size="1.33em" /> Singer</Pill>
 						<Pill><Icon icon="pencil-line" size="1.33em" /> Writer</Pill>
 					</div>
 				</Hero>
 
 				<img
-					alt="Jeanine White smiling in a red plaid shirt and tortoise shell glasses"
+					alt="César A. Suárez Orizondo portrait image"
 					width="480"
 					height="620"
 					src="/assets/portrait.jpg"
@@ -56,7 +56,7 @@ const projects = (await getCollection('work'))
 			<section class="section with-background with-cta">
 				<header class="section-header stack gap-2 lg:gap-4">
 					<h3>Selected Work</h3>
-					<p>Take a look below at some of my featured work for clients from the past few years.</p>
+					<p>Take a look below at some of my featured work to see what I've been working on.</p>
 				</header>
 
 				<div class="gallery">
@@ -81,17 +81,16 @@ const projects = (await getCollection('work'))
 
 			<section class="section with-background bg-variant">
 				<header class="section-header stack gap-2 lg:gap-4">
-					<h3>Mentions</h3>
+					<h3>Services</h3>
 					<p>
-						I have been fortunate enough to receive praise for my work in several publications. Take
-						a look below to learn more.
+						I offer a range of services to help you achieve your goals. Whether you need a website, a web application, or a custom solution, I can help.
 					</p>
 				</header>
 
 				<div class="gallery">
 					<Grid variant="small">
 						{
-							['Medium', 'BuzzFeed', 'The Next Web', 'awwwards.', 'TechCrunch'].map((brand) => (
+							['Web Design', 'Web Development', 'Web Applications', 'Branding', 'Writing'].map((brand) => (
 								<li class="mention-card">
 									<p>{brand}</p>
 								</li>
