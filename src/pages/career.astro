@@ -1,0 +1,182 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ScrollFade from "../components/ScrollFade";
+import Hero from "../components/Hero.astro";
+import { FaBriefcase, FaCode, FaGraduationCap } from "react-icons/fa";
+import ContactCTA from "../components/ContactCTA.astro";
+
+const timelineData = [
+  {
+    year: "2024",
+    title: "Junior Developer",
+    description:
+      "Developed web applications with React and Node.js, learning industry best practices and agile methodologies.",
+    icon: FaCode,
+  },
+  {
+    year: "2020 - 2022",
+    title: "Mid-level Developer",
+    description:
+      "Led the front-end development team, creating scalable and performant applications with Angular and Tailwind CSS.",
+    icon: FaBriefcase,
+  },
+  {
+    year: "2022 - Present",
+    title: "Senior Developer",
+    description:
+      "Architected end-to-end solutions using Astro, React, and Docker while mentoring junior developers.",
+    icon: FaGraduationCap,
+  },
+];
+---
+
+<BaseLayout
+  title="Career | Ceradev"
+  description="Learn about the career trajectory of César A. Suárez Orizondo"
+>
+  <div class="stack gap-30 lg:gap-48">
+    <main class="wrapper career">
+      <ScrollFade client:load className="intro">
+        <section class="intro">
+          <header>
+            <Hero
+              title="My Career"
+              tagline="Explore my career journey and experience in the tech industry."
+              align="start"
+            />
+          </header>
+        </section>
+      </ScrollFade>
+
+      <ScrollFade client:load className="timeline">
+        <section class="timeline">
+          {
+            timelineData.map((item, index) => (
+              <div
+                class={`timeline-item ${index % 2 === 0 ? "left" : "right"}`}
+                key={index}
+              >
+                <div class="timeline-icon">{<item.icon size="2em" />}</div>
+                <div class="timeline-content">
+                  <h3>{item.title}</h3>
+                  <span class="timeline-year">{item.year}</span>
+                  <p>{item.description}</p>
+                </div>
+              </div>
+            ))
+          }
+        </section>
+      </ScrollFade>
+    </main>
+
+    <ContactCTA />
+
+  </div>
+</BaseLayout>
+
+<style>
+  /* General Layout */
+  .career {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+    text-align: center;
+    color: var(--gray-300);
+  }
+
+  .wrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  /* Intro Section */
+  .intro {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .intro header p {
+    font-size: var(--text-md);
+    line-height: 1.8;
+    color: var(--gray-400);
+  }
+
+  /* Timeline Section */
+  .timeline {
+    position: relative;
+    margin: 2rem 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .timeline-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    gap: 2rem;
+  }
+
+  .timeline-item.right {
+    flex-direction: row-reverse;
+  }
+
+  .timeline-icon {
+    background-color: var(--accent-regular);
+    color: white;
+    padding: 1rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin: 0 1rem;
+  }
+
+  .timeline-content {
+    max-width: 45%;
+    background-color: var(--gray-999);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow-sm);
+    text-align: left;
+  }
+
+  .timeline-year {
+    font-size: 1.2rem;
+    color: var(--accent-regular);
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-content h3 {
+    color: var(--gray-300);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-content p {
+    color: var(--gray-400);
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 768px) {
+    .timeline-content {
+      max-width: 100%;
+    }
+
+    .timeline-item {
+      flex-direction: column;
+    }
+
+    .timeline-item.right {
+      flex-direction: column;
+    }
+  }
+</style>

@@ -2,38 +2,50 @@
 import { getCollection } from 'astro:content';
 
 import BaseLayout from '../layouts/BaseLayout.astro';
-
 import ContactCTA from '../components/ContactCTA.astro';
 import PortfolioPreview from '../components/PortfolioPreview.astro';
 import Hero from '../components/Hero.astro';
 import Grid from '../components/Grid.astro';
 
+// Importa el componente ScrollFade
+import ScrollFade from '../components/ScrollFade';
+
 const projects = (await getCollection('work')).sort(
-	(a: { data: { publishDate: number; }; }, b: { data: { publishDate: number; }; }) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+	(a: { data: { publishDate: string | number | Date; }; }, b: { data: { publishDate: string | number | Date; }; }) => new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf(),
 );
 ---
 
 <BaseLayout
-	title="My Work | Jeanine White"
-	description="Learn about Jeanine White's most recent projects"
+	title="My Work | Ceradev"
+	description="Explore César A. Suárez Orizondo's most recent projects"
 >
 	<div class="stack gap-20">
 		<main class="wrapper stack gap-8">
-			<Hero
-				title="My Work"
-				tagline="See my most recent projects below to get an idea of my past experience."
-				align="start"
-			/>
-			<Grid variant="offset">
-				{
-					projects.map((project: unknown) => (
-						<li>
-							<PortfolioPreview project={project} />
-						</li>
-					))
-				}
-			</Grid>
+			<ScrollFade client:load className="hero">
+				<Hero
+					title="My Work"
+					tagline="See my most recent projects below to get an idea of my past experience."
+					align="start"
+				/>
+			</ScrollFade>
+
+			<ScrollFade client:load className="work">
+				<Grid variant="offset">
+					{
+						projects.map((project: unknown) => (
+							<li>
+								<ScrollFade client:load className="work-preview">
+									<PortfolioPreview project={project} />
+								</ScrollFade>
+							</li>
+						))
+					}
+				</Grid>
+			</ScrollFade>
 		</main>
-		<ContactCTA />
+
+		<ScrollFade client:load className="contact">
+			<ContactCTA />
+		</ScrollFade>
 	</div>
 </BaseLayout>
