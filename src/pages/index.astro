@@ -46,8 +46,10 @@ const projects = (await getCollection('work'))
 
 				<img
 					alt="César A. Suárez Orizondo portrait image"
-					width="480"
-					height="620"
+					width="280"
+					height="400"
+					loading="lazy"
+					decoding="async"
 					src="/assets/portrait.jpg"
 				/>
 			</header>
@@ -103,7 +105,7 @@ const projects = (await getCollection('work'))
 				<div class="gallery">
 					<Grid variant="small">
 						{
-							['Web Design', 'Web Development', 'Web Applications', 'Branding', 'Writing'].map((brand) => (
+							['Web Design', 'Web Development', 'Web Applications', 'E-Commerce', 'Digital Marketing'].map((brand) => (
 								<li class="mention-card">
 										<p>{brand}</p>
 								</li>
@@ -133,10 +135,10 @@ const projects = (await getCollection('work'))
 	}
 
 	.hero img {
-		aspect-ratio: 5 / 4;
+		aspect-ratio: 3 / 4;
 		object-fit: cover;
 		object-position: top;
-		border-radius: 1.5rem;
+		border-radius: 2.5rem;
 		box-shadow: var(--shadow-md);
 	}
 
