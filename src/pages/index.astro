@@ -30,7 +30,7 @@ const projects = (await getCollection('work'))
 	<div class="stack gap-20 lg:gap-48">
 		<div class="wrapper stack gap-8 lg:gap-20">
 			<ScrollFade client:load className="hero">
-			<header class="hero">
+			<section class="intro">
 				<Hero
 					title="Hi, I'm César A. Suárez Orizondo"
 					tagline="I am a software developer, singer, and writer based in Tenerife, Spain."
@@ -52,7 +52,7 @@ const projects = (await getCollection('work'))
 					decoding="async"
 					src="/assets/portrait.jpg"
 				/>
-			</header>
+			</section>
 			</ScrollFade>
 			
 			<ScrollFade client:load className="skills">
@@ -123,7 +123,7 @@ const projects = (await getCollection('work'))
 </BaseLayout>
 
 <style>
-	.hero {
+	.intro {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -134,7 +134,7 @@ const projects = (await getCollection('work'))
 		display: none;
 	}
 
-	.hero img {
+	.intro img {
 		aspect-ratio: 3 / 4;
 		object-fit: cover;
 		object-position: top;
@@ -143,7 +143,7 @@ const projects = (await getCollection('work'))
 	}
 
 	@media (min-width: 50em) {
-		.hero {
+		.intro {
 			display: grid;
 			grid-template-columns: 6fr 4fr;
 			padding-inline: 2.5rem;
@@ -156,7 +156,7 @@ const projects = (await getCollection('work'))
 			gap: 0.5rem;
 		}
 
-		.hero img {
+		.intro img {
 			aspect-ratio: 3 / 4;
 			border-radius: 4.5rem;
 			object-fit: cover;

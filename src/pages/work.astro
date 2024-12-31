@@ -22,17 +22,19 @@ const projects = (await getCollection('work')).sort(
 	<div class="stack gap-20">
 		<main class="wrapper stack gap-8">
 			<ScrollFade client:load className="hero">
+				<section class="intro">
 				<Hero
 					title="My Work"
 					tagline="See my most recent projects below to get an idea of my past experience."
 					align="start"
 				/>
+				</section>
 			</ScrollFade>
 
 			<ScrollFade client:load className="work">
 				<Grid variant="offset">
 					{
-						projects.map((project: unknown) => (
+						projects.map((project: any) => (
 							<li>
 								<ScrollFade client:load className="work-preview">
 									<PortfolioPreview project={project} />

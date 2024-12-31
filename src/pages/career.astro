@@ -35,7 +35,7 @@ const timelineData = [
   description="Learn about the career trajectory of César A. Suárez Orizondo"
 >
   <div class="stack gap-30 lg:gap-48">
-    <main class="wrapper stack gap-30 lg:gap-48 career">
+    <main class="wrapper stack gap-30 lg:gap-48">
       <ScrollFade client:load className="intro">
         <section class="intro">
           <header>
@@ -54,7 +54,7 @@ const timelineData = [
             timelineData.map((item, index) => (
               <div
                 class={`timeline-item ${index % 2 === 0 ? "left" : "right"}`}
-                key={index}
+                id={`timeline-item-${index}`}
               >
                 <div class="timeline-icon">{<item.icon size="2em" />}</div>
                 <div class="timeline-content">
@@ -70,40 +70,10 @@ const timelineData = [
     </main>
 
     <ContactCTA />
-    
   </div>
 </BaseLayout>
 
 <style>
-  /* General Layout */
-  .career {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4rem;
-    text-align: center;
-    color: var(--gray-300);
-  }
-
-  .wrapper {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-  }
-
-  /* Intro Section */
-  .intro {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .intro header p {
-    font-size: var(--text-md);
-    line-height: 1.8;
-    color: var(--gray-400);
-  }
-
   /* Timeline Section */
   .timeline {
     position: relative;
