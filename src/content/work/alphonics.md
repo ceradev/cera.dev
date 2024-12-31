@@ -2,8 +2,14 @@
 title: Alphonics
 publishDate: 2024-05-21 00:00:00
 url: https://github.com/ceradev/alphonics
-img: /assets/stock-1.jpg
-img_alt: Iridescent ripples of a bright blue and pink liquid
+preview: /assets/alphonics/preview.jpg
+imgs:
+  [
+    /assets/alphonics/preview.jpg,
+    /assets/alphonics/stock-2.jpg,
+    /assets/alphonics/stock-3.jpg,
+  ]
+preview_alt: Alphonics preview image of the application
 description: |
   A web-based application to give competition to Spotify, building on the basics, laying the foundations to add your favourite songs, artists, and albums, and play their music.
 tags:
@@ -17,7 +23,7 @@ tags:
 
 > Alphonics is an application based on big business like Spotify, Deezer or Apple Music, focused on leisure, diversity and the freedom to express, listen or enjoy your music without difficulties.
 
-With our application we aim to change the way users experience music, to make it something closer to them, with a different format to the one they are used to from our competitors.  
+With our application we aim to change the way users experience music, to make it something closer to them, with a different format to the one they are used to from our competitors.
 
 We also aim to ensure that there is no limit when it comes to discovering emerging artists or new genres, and with our system we will further help new artists to open up on our platform.
 

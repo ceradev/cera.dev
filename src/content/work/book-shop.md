@@ -1,9 +1,14 @@
 ---
 title: Book Shop
 publishDate: 2024-06-20 00:00:00
-img: /assets/stock-2.jpg
+preview: /assets/book-shop/preview.jpg
+imgs:
+  [
+    /assets/book-shop/preview.jpg,
+    /assets/book-shop/stock-2.jpg,
+]
 url: https://github.com/ceradev/book-shop
-img_alt: A bookshelf with a wide range of books and a table of contents to browse
+preview_alt: A bookshelf with a wide range of books and a table of contents to browse
 description: |
   A website based on a book shop that sells a wide range of books and magazines, all in one place, you can find everything you need, buy or sell your own books in our online store for the people of the future.
 tags:

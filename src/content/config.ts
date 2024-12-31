@@ -9,8 +9,10 @@ export const collections = {
 			publishDate: z.coerce.date(),
 			url: z.string(),
 			tags: z.array(z.string()),
-			img: z.string(),
-			img_alt: z.string().optional(),
+			preview: z.string(),
+			preview_alt: z.string().optional(),
+			imgs: z.array(z.string()),
+			imgs_alt: z.string().optional(),
 		}),
 	}),
 };

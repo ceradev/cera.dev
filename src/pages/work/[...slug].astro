@@ -7,14 +7,13 @@ import ContactCTA from '../../components/ContactCTA.astro';
 import Hero from '../../components/Hero.astro';
 import Icon from '../../components/Icon.astro';
 import Pill from '../../components/Pill.astro';
+import Carousel from '../../components/Carousel.jsx'; // Componente React para el carrusel
 
 interface Props {
 	entry: CollectionEntry<'work'>;
 }
 
-// This is a dynamic route that generates a page for every Markdown file in src/content/
-// Read more about dynamic routes and this `getStaticPaths` function in the Astro docs:
-// https://docs.astro.build/en/core-concepts/routing/#dynamic-routes
+// Generación de rutas dinámicas
 export async function getStaticPaths() {
 	const work = await getCollection('work');
 	return work.map((entry) => ({
@@ -25,6 +24,9 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+
+// Si no hay imgs definidas, usa el preview por defecto
+const carouselImages = entry.data.imgs || [entry.data.preview];
 ---
 
 <BaseLayout title={entry.data.title} description={entry.data.description}>
@@ -59,7 +61,8 @@ const { Content } = await entry.render();
 			<ScrollFade client:load className="wrapper">
 				<main class="wrapper">
 					<div class="stack gap-10 content">
-						{entry.data.img && <img src={entry.data.img} alt={entry.data.img_alt || ''} />}
+						{/* Carrusel dinámico */}
+						<Carousel images={carouselImages} />
 						<div class="content">
 							<Content />
 						</div>
@@ -175,5 +178,48 @@ const { Content } = await entry.render();
 		.content :global(blockquote) {
 			font-size: var(--text-2xl);
 		}
+	}
+
+	/* Ajustes del carrusel */
+	.carousel {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		position: relative;
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.carousel-images img {
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+		border-radius: 10px;
+	}
+
+	.arrow {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		background-color: rgba(0, 0, 0, 0.5);
+		color: white;
+		border: none;
+		border-radius: 50%;
+		padding: 10px;
+		cursor: pointer;
+	}
+
+	.left-arrow {
+		left: 10px;
+	}
+
+	.right-arrow {
+		right: 10px;
+	}
+
+	.carousel-indicator {
+		margin-top: 10px;
+		font-size: 1.2rem;
+		color: var(--gray-300);
 	}
 </style>
