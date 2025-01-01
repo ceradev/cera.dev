@@ -62,7 +62,7 @@ const carouselImages = entry.data.imgs || [entry.data.preview];
 				<main class="wrapper">
 					<div class="stack gap-10 content">
 						{/* Carrusel dinámico */}
-						<Carousel images={carouselImages} />
+						<Carousel client:load images={carouselImages} />
 						<div class="content">
 							<Content />
 						</div>

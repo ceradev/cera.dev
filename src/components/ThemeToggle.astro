@@ -4,7 +4,7 @@ import Icon from './Icon.astro';
 
 <theme-toggle>
 	<button>
-		<span class="sr-only">Dark theme</span>
+		<span class="sr-only">Toggle theme</span>
 		<span class="icon light"><Icon icon="sun" /></span>
 		<span class="icon dark"><Icon icon="moon-stars" /></span>
 	</button>
@@ -78,13 +78,25 @@ import Icon from './Icon.astro';
 			const setTheme = (dark: boolean) => {
 				document.documentElement.classList[dark ? 'add' : 'remove']('theme-dark');
 				button.setAttribute('aria-pressed', String(dark));
+				// Persist theme in localStorage
+				sessionStorage.setItem('theme', dark ? 'dark' : 'light');
 			};
+
+			/** Get the current theme from localStorage or set light as default. */
+			const getInitialTheme = () => {
+				const storedTheme = sessionStorage.getItem('theme');
+				if (storedTheme) {
+					return storedTheme === 'dark';
+				}
+				// Default to light theme if no preference is set
+				return false;
+			};
+
+			// Initialize button state to reflect current theme.
+			setTheme(getInitialTheme());
 
 			// Toggle the theme when a user clicks the button.
 			button.addEventListener('click', () => setTheme(!this.isDark()));
-
-			// Initialize button state to reflect current theme.
-			setTheme(this.isDark());
 		}
 
 		isDark() {

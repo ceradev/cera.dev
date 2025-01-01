@@ -6,8 +6,13 @@ preview: /assets/alphonics/preview.jpg
 imgs:
   [
     /assets/alphonics/preview.jpg,
+    /assets/alphonics/stock-1.jpg,
     /assets/alphonics/stock-2.jpg,
     /assets/alphonics/stock-3.jpg,
+    /assets/alphonics/stock-4.jpg,
+    /assets/alphonics/stock-5.jpg,
+    /assets/alphonics/stock-6.jpg,
+    /assets/alphonics/stock-7.jpg,
   ]
 preview_alt: Alphonics preview image of the application
 description: |
