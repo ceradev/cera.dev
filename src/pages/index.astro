@@ -21,9 +21,6 @@ import Skills from '../components/Skills.astro';
 const projects = (await getCollection('work'))
 	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
 	.slice(0, 4);
-
-// Full Astro Component Syntax:
-// https://docs.astro.build/basics/astro-components/
 ---
 
 <BaseLayout title="Ceradev" description="César A. Suárez Orizondo's personal website">
@@ -55,14 +52,14 @@ const projects = (await getCollection('work'))
 			</section>
 			</ScrollFade>
 			
-			<ScrollFade client:load className="skills">
+			<ScrollFade client:visible className="skills">
 			<Skills />
 			</ScrollFade>
 		</div>
 
 
 		<main class="wrapper stack gap-20 lg:gap-48">
-			<ScrollFade client:load className="work">
+			<ScrollFade client:visible className="work">
 			<section class="section with-background with-cta">
 				<header class="section-header stack gap-2 lg:gap-4">
 					<h3>Selected Work</h3>
@@ -84,7 +81,7 @@ const projects = (await getCollection('work'))
 				</div>
 
 				<div class="cta">
-					<CallToAction href="/work/">
+					<CallToAction href="/work/" target="_self">
 						View All
 						<Icon icon="arrow-right" size="1.2em" />
 					</CallToAction>
@@ -93,7 +90,7 @@ const projects = (await getCollection('work'))
 			</ScrollFade>
 
 
-			<ScrollFade client:load className="services">
+			<ScrollFade client:visible className="services">
 			<section class="section with-background bg-variant">
 				<header class="section-header stack gap-2 lg:gap-4">
 					<h3>Services</h3>
@@ -116,7 +113,7 @@ const projects = (await getCollection('work'))
 			</section>
 			</ScrollFade>
 		</main>
-		<ScrollFade client:load className="contact">
+		<ScrollFade client:visible className="contact">
 		<ContactCTA />
 		</ScrollFade>
 	</div>
@@ -167,7 +164,7 @@ const projects = (await getCollection('work'))
 
 	.section {
 		display: grid;
-		gap: 2rem;
+		gap: 5rem;
 	}
 
 	.section-header {
