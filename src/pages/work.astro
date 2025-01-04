@@ -11,8 +11,9 @@ import Grid from '../components/Grid.astro';
 import ScrollFade from '../components/ScrollFade';
 
 const projects = (await getCollection('work')).sort(
-	(a: { data: { publishDate: string | number | Date; }; }, b: { data: { publishDate: string | number | Date; }; }) => new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf(),
+	(a, b) => new Date(b.data.publishDate).valueOf() - new Date(a.data.publishDate).valueOf(),
 );
+
 ---
 
 <BaseLayout
