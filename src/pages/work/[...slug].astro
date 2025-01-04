@@ -2,22 +2,22 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 
 import BaseLayout from '../../layouts/BaseLayout.astro';
-
+import ScrollFade from '../../components/ScrollFade';
 import ContactCTA from '../../components/ContactCTA.astro';
 import Hero from '../../components/Hero.astro';
 import Icon from '../../components/Icon.astro';
 import Pill from '../../components/Pill.astro';
+import Carousel from '../../components/Carousel.jsx'; // Componente React para el carrusel
 
 interface Props {
 	entry: CollectionEntry<'work'>;
 }
 
-// This is a dynamic route that generates a page for every Markdown file in src/content/
-// Read more about dynamic routes and this `getStaticPaths` function in the Astro docs:
-// https://docs.astro.build/en/core-concepts/routing/#dynamic-routes
+export const prerender = true;
+// Generación de rutas dinámicas
 export async function getStaticPaths() {
 	const work = await getCollection('work');
-	return work.map((entry) => ({
+	return work.map((entry: { slug: any; }) => ({
 		params: { slug: entry.slug },
 		props: { entry },
 	}));
@@ -25,36 +25,60 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+
+// Si no hay imgs definidas, usa el preview por defecto
+const carouselImages = entry.data.imgs || [entry.data.preview];
 ---
 
 <BaseLayout title={entry.data.title} description={entry.data.description}>
 	<div class="stack gap-20">
 		<div class="stack gap-15">
-			<header>
-				<div class="wrapper stack gap-2">
-					<a class="back-link" href="/work/"><Icon icon="arrow-left" /> Work</a>
-					<Hero title={entry.data.title} align="start">
-						<div class="details">
-							<div class="tags">
-								{entry.data.tags.map((t) => <Pill>{t}</Pill>)}
+			<ScrollFade client:load className="wrapper">
+				<header>
+					<div class="wrapper stack gap-2">
+						<a class="back-link" href="/work/"><Icon icon="arrow-left" /> Back</a>
+						<Hero title={entry.data.title} align="start">
+							<p>({entry.data.status})</p>
+							<div class="details">
+								<div class="link">
+									<a
+										href={entry.data.url}
+										target="_blank"
+										rel="noopener noreferrer"
+										class="entry-link"
+									>
+										Visit <Icon icon="arrow-right" size="1.2em" />
+									</a>
+								</div>
+								<div class="tags">
+									{entry.data.tags.map((t: unknown) => <Pill>{t}</Pill>)}
+								</div>
+								<p class="description">{entry.data.description}</p>
 							</div>
-							<p class="description">{entry.data.description}</p>
-						</div>
-					</Hero>
-				</div>
-			</header>
-			<main class="wrapper">
-				<div class="stack gap-10 content">
-					{entry.data.img && <img src={entry.data.img} alt={entry.data.img_alt || ''} />}
-					<div class="content">
-						<Content />
+						</Hero>
 					</div>
-				</div>
-			</main>
+				</header>
+			</ScrollFade>
+			
+			<ScrollFade client:load className="wrapper">
+				<main class="wrapper">
+					<div class="stack gap-10 content">
+						{/* Carrusel dinámico */}
+						<Carousel client:load images={carouselImages} />
+						<div class="content">
+							<Content />
+						</div>
+					</div>
+				</main>
+			</ScrollFade>
 		</div>
-		<ContactCTA />
+		
+		<ScrollFade client:load className="wrapper">
+			<ContactCTA />
+		</ScrollFade>
 	</div>
 </BaseLayout>
+
 
 <style>
 	header {
@@ -64,6 +88,12 @@ const { Content } = await entry.render();
 
 	.back-link {
 		display: none;
+	}
+
+	.entry-link {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
 	}
 
 	.details {
@@ -120,6 +150,7 @@ const { Content } = await entry.render();
 	}
 
 	.back-link,
+	.entry-link,
 	.content :global(a) {
 		text-decoration: 1px solid underline transparent;
 		text-underline-offset: 0.25em;
@@ -128,6 +159,8 @@ const { Content } = await entry.render();
 
 	.back-link:hover,
 	.back-link:focus,
+	.entry-link:hover,
+	.entry-link:focus,
 	.content :global(a:hover),
 	.content :global(a:focus) {
 		text-decoration-color: currentColor;
@@ -147,5 +180,48 @@ const { Content } = await entry.render();
 		.content :global(blockquote) {
 			font-size: var(--text-2xl);
 		}
+	}
+
+	/* Ajustes del carrusel */
+	.carousel {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		position: relative;
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.carousel-images img {
+		width: 100%;
+		height: auto;
+		object-fit: cover;
+		border-radius: 10px;
+	}
+
+	.arrow {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		background-color: rgba(0, 0, 0, 0.5);
+		color: white;
+		border: none;
+		border-radius: 50%;
+		padding: 10px;
+		cursor: pointer;
+	}
+
+	.left-arrow {
+		left: 10px;
+	}
+
+	.right-arrow {
+		right: 10px;
+	}
+
+	.carousel-indicator {
+		margin-top: 10px;
+		font-size: 1.2rem;
+		color: var(--gray-300);
 	}
 </style>
