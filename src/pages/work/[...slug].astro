@@ -13,6 +13,7 @@ interface Props {
 	entry: CollectionEntry<'work'>;
 }
 
+export const prerender = true;
 // Generación de rutas dinámicas
 export async function getStaticPaths() {
 	const work = await getCollection('work');
