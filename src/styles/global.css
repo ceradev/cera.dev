@@ -230,6 +230,11 @@ h5 {
 	flex-direction: column;
 }
 
+.intro {
+	font-size: var(--text-lg);
+	margin-bottom: 2rem;
+}
+
 .gap-2 {
 	gap: 0.5rem;
 }

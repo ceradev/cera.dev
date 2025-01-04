@@ -1,5 +1,6 @@
 ---
 title: Book Shop
+status: in progress
 publishDate: 2024-06-20 00:00:00
 preview: /assets/book-shop/preview.jpg
 imgs:

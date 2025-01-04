@@ -1,5 +1,6 @@
 ---
 title: Alphonics
+status: in progress
 publishDate: 2024-05-21 00:00:00
 url: https://github.com/ceradev/alphonics
 preview: /assets/alphonics/preview.jpg

@@ -16,7 +16,7 @@ interface Props {
 // Generación de rutas dinámicas
 export async function getStaticPaths() {
 	const work = await getCollection('work');
-	return work.map((entry) => ({
+	return work.map((entry: { slug: any; }) => ({
 		params: { slug: entry.slug },
 		props: { entry },
 	}));
@@ -37,6 +37,7 @@ const carouselImages = entry.data.imgs || [entry.data.preview];
 					<div class="wrapper stack gap-2">
 						<a class="back-link" href="/work/"><Icon icon="arrow-left" /> Back</a>
 						<Hero title={entry.data.title} align="start">
+							<p>({entry.data.status})</p>
 							<div class="details">
 								<div class="link">
 									<a
@@ -49,7 +50,7 @@ const carouselImages = entry.data.imgs || [entry.data.preview];
 									</a>
 								</div>
 								<div class="tags">
-									{entry.data.tags.map((t) => <Pill>{t}</Pill>)}
+									{entry.data.tags.map((t: unknown) => <Pill>{t}</Pill>)}
 								</div>
 								<p class="description">{entry.data.description}</p>
 							</div>

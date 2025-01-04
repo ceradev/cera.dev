@@ -7,24 +7,30 @@ import ContactCTA from "../components/ContactCTA.astro";
 
 const timelineData = [
   {
-    year: "2018 - 2020",
-    title: "Junior Developer",
+    year: "February 2024 - May 2024",
+    title: "Full Stack Developer internship",
+    business_url: "https://eviden.com/",
+    business_name: "Eviden",
     description:
-      "Developed web applications with React and Node.js, learning industry best practices and agile methodologies.",
+      "Interned as a full stack developer, doing a 4-week training with the company's technologies such as Spring Boot and Angular, their company policies with Git, and the work methodology 'Agile' they use for teamwork. and a month and a half of feedback doing a group project with the technologies learned, which include aws, keycloak, docker among them.",
     icon: FaCode,
   },
   {
-    year: "2020 - 2022",
-    title: "Mid-level Developer",
+    year: "May 2024 - Present",
+    title: "Full Stack Developer",
+    business_url: "https://eviden.com/",
+    business_name: "Eviden",
     description:
-      "Led the front-end development team, creating scalable and performant applications with Angular and Tailwind CSS.",
+      "I am currently working as a Junior Full-Stack Developer at Eviden, a company that specializes in developing software solutions for the healthcare industry. My role involves working on the development of web applications using as main technologies like Angular, Spring Boot, and PostgreSQL.",
     icon: FaBriefcase,
   },
   {
-    year: "2022 - Present",
+    year: "Present - Future",
     title: "Senior Developer",
+    business_url: "https://novadevs-eu.netlify.app",
+    business_name: "Nova Devs",
     description:
-      "Architected end-to-end solutions using Astro, React, and Docker while mentoring junior developers.",
+      "My goal is to continue growing as a developer and become a Senior Developer in the near future. I am passionate about learning new technologies and improving my skills to become a better developer. And I am working separately in an organisation called Nova Devs in which I am involved, creating both individual and group projects, and growing as a programmer.",
     icon: FaGraduationCap,
   },
 ];
@@ -34,8 +40,8 @@ const timelineData = [
   title="Career | Ceradev"
   description="Learn about the career trajectory of César A. Suárez Orizondo"
 >
-  <div class="stack gap-30 lg:gap-48">
-    <main class="wrapper stack gap-30 lg:gap-48">
+  <div class="stack gap-20 lg:gap-32">
+    <main class="wrapper stack gap-20 lg:gap-32">
       <ScrollFade client:load className="intro">
         <section class="intro">
           <header>
@@ -52,6 +58,7 @@ const timelineData = [
         <section class="timeline">
           {
             timelineData.map((item, index) => (
+            <ScrollFade client:visible className="timeline-item">
               <div
                 class={`timeline-item  ${index % 2 === 0 ? "left" : "right"}`}
                 id={`timeline-item-${index}`}
@@ -60,9 +67,11 @@ const timelineData = [
                 <div class="timeline-content">
                   <h3>{item.title}</h3>
                   <span class="timeline-year">{item.year}</span>
+                  <h4><a href={item.business_url} target="_blank">{item.business_name}</a></h4>
                   <p>{item.description}</p>
                 </div>
               </div>
+            </ScrollFade>
             ))
           }
         </section>
@@ -82,6 +91,10 @@ const timelineData = [
     display: grid;
     grid-template-columns: 1fr;
     gap: 3rem;
+  }
+
+  .intro {
+    margin-top: 2rem;
   }
 
   .timeline-item {
@@ -128,6 +141,25 @@ const timelineData = [
     color: var(--gray-300);
     font-size: 1.5rem;
     margin-bottom: 0.5rem;
+  }
+
+  .timeline-content h4 {
+    color: var(--gray-400);
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-content h4 a {
+    text-decoration: none;
+    color: var(--gray-400);
+
+    &:hover {
+      text-decoration: underline;
+      color: var(--accent-regular);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
   }
 
   .timeline-content p {
