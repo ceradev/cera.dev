@@ -26,7 +26,7 @@ const projects = (await getCollection('work'))
 <BaseLayout title="Ceradev" description="César A. Suárez Orizondo's personal website">
 	<div class="stack gap-20 lg:gap-48">
 		<div class="wrapper stack gap-8 lg:gap-20">
-			<ScrollFade client:load className="hero">
+			<ScrollFade client:visible className="hero">
 			<section class="intro">
 				<Hero
 					title="Hi, I'm César A. Suárez Orizondo"
@@ -71,7 +71,7 @@ const projects = (await getCollection('work'))
 						{
 							projects.map((project: any) => (
 								<li>
-									<ScrollFade client:load className="work-preview">
+									<ScrollFade client:visible className="work-preview">
 									<PortfolioPreview project={project} />
 									</ScrollFade>
 								</li>
