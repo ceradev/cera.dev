@@ -1,34 +1,20 @@
-import { useEffect, useRef, useState } from 'react';
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
-const ScrollFade = ({ children, className }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef();
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
-      { threshold: 0.2 }
-    );
-
-    if (ref.current) observer.observe(ref.current);
-
-    return () => {
-      if (ref.current) observer.unobserve(ref.current);
-    };
-  }, []);
+const ScrollFade = ({ children, className, threshold = 0.2, duration = 0.8, delay = 0.2 }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: false, amount: threshold });
 
   return (
-    <div
+    <motion.div
       ref={ref}
       className={className}
-      style={{
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? 'translateY(0)' : 'translateY(50px)',
-        transition: 'opacity 0.8s ease-out, transform 0.8s ease-out',
-      }}
+      initial={{ opacity: 0, y: 50 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+      transition={{ duration, delay }}
     >
       {children}
-    </div>
+    </motion.div>
   );
 };
 
