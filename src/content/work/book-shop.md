@@ -21,13 +21,13 @@ imgs:
     /assets/book-shop/stock-13.png,
 ]
 technologies: 
-  - Angular JS
-  - Material 
-  - UIKeycloak
-  - Typescript
-  - Spring Boot
-  - PostgreSQL
-  - Docker
+  - FaAngular
+  - FaNodeJs
+  - SiKeycloak 
+  - SiTypescript
+  - SiSpringboot 
+  - SiPostgresql 
+  - FaDocker 
 url: https://github.com/ceradev/book-shop
 preview_alt: A bookshelf with a wide range of books and a table of contents to browse
 description: |

@@ -4,14 +4,13 @@ status: in progress
 publishDate: 2024-05-21 00:00:00
 url: https://github.com/ceradev/alphonics
 technologies: 
-  - React JS
-  - Vite.js
-  - Sequelize ORM
-  - Typescript
-  - Tailwind CSS
-  - Express.js
-  - JWT Token
-  - MySQL
+  - FaReact
+  - SiVite
+  - SiSequelize
+  - SiTypescript
+  - SiTailwindcss
+  - SiExpress
+  - SiMysql
 preview: /assets/alphonics/preview.jpg
 imgs:
   [
