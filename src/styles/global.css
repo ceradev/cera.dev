@@ -156,10 +156,6 @@ img {
   height: auto;
 }
 
-.with-background {
-  position: relative;
-}
-
 .with-background::before {
   --hero-bg: var(--bg-image-subtle-2);
 
@@ -178,10 +174,6 @@ img {
   background-blend-mode: overlay, normal, normal, normal;
   mix-blend-mode: var(--bg-blend-mode);
   z-index: -1;
-}
-
-.with-background.bg-variant::before {
-  --hero-bg: var(--bg-image-subtle-1);
 }
 
 a {

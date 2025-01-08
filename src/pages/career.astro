@@ -41,7 +41,10 @@ const timelineData = [
   description="Learn about the career trajectory of César A. Suárez Orizondo"
 >
   <div class="stack gap-20 lg:gap-32">
+    <!-- Main Content -->
     <main class="wrapper stack gap-20 lg:gap-32">
+      
+      <!-- Intro Section -->
       <ScrollFade client:load className="intro">
         <section class="intro">
           <header>
@@ -54,36 +57,44 @@ const timelineData = [
         </section>
       </ScrollFade>
 
+      <!-- Timeline Section -->
       <ScrollFade client:load className="timeline">
         <section class="timeline">
-          {
-            timelineData.map((item, index) => (
+          {timelineData.map((item, index) => (
             <ScrollFade client:visible className="timeline-item">
               <div
-                class={`timeline-item  ${index % 2 === 0 ? "left" : "right"}`}
+                class={`timeline-item ${index % 2 === 0 ? "left" : "right"}`}
                 id={`timeline-item-${index}`}
               >
                 <div class="timeline-icon">{<item.icon size="2em" />}</div>
                 <div class="timeline-content">
                   <h3>{item.title}</h3>
                   <span class="timeline-year">{item.year}</span>
-                  <h4><a href={item.business_url} target="_blank">{item.business_name}</a></h4>
+                  <h4>
+                    <a href={item.business_url} target="_blank">
+                      {item.business_name}
+                    </a>
+                  </h4>
                   <p>{item.description}</p>
                 </div>
               </div>
             </ScrollFade>
-            ))
-          }
+          ))}
         </section>
       </ScrollFade>
     </main>
 
+    <!-- Contact Section -->
     <ContactCTA />
   </div>
 </BaseLayout>
 
 <style>
-  /* Timeline Section */
+  /* General Styles */
+  .intro {
+    margin-top: 2rem;
+  }
+
   .timeline {
     position: relative;
     margin: 2rem 0;
@@ -91,10 +102,6 @@ const timelineData = [
     display: grid;
     grid-template-columns: 1fr;
     gap: 3rem;
-  }
-
-  .intro {
-    margin-top: 2rem;
   }
 
   .timeline-item {
@@ -109,6 +116,7 @@ const timelineData = [
     flex-direction: row-reverse;
   }
 
+  /* Timeline Icon */
   .timeline-icon {
     background-color: var(--accent-regular);
     color: white;
@@ -121,6 +129,7 @@ const timelineData = [
     margin: 0 1rem;
   }
 
+  /* Timeline Content */
   .timeline-content {
     max-width: 45%;
     background-color: var(--gray-999);
@@ -153,13 +162,13 @@ const timelineData = [
   .timeline-content h4 a {
     text-decoration: underline;
     color: var(--gray-400);
+  }
 
-    &:hover {
-      text-decoration: underline;
-      color: var(--accent-regular);
-      transition: all 0.3s;
-      cursor: pointer;
-    }
+  .timeline-content h4 a:hover {
+    text-decoration: underline;
+    color: var(--accent-regular);
+    transition: all 0.3s;
+    cursor: pointer;
   }
 
   .timeline-content p {
@@ -168,6 +177,7 @@ const timelineData = [
     line-height: 1.6;
   }
 
+  /* Responsive Styles */
   @media (max-width: 768px) {
     .timeline-content {
       max-width: 100%;
