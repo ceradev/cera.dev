@@ -1,26 +1,26 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
+import { type CollectionEntry, getCollection } from "astro:content";
 
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import ScrollFade from '../../components/ScrollFade';
-import ContactCTA from '../../components/ContactCTA.astro';
-import Hero from '../../components/Hero.astro';
-import Icon from '../../components/Icon.astro';
-import Pill from '../../components/Pill.astro';
-import Carousel from '../../components/Carousel.jsx'; // Componente React para el carrusel
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ScrollFade from "../../components/ScrollFade";
+import ContactCTA from "../../components/ContactCTA.astro";
+import Hero from "../../components/Hero.astro";
+import Icon from "../../components/Icon.astro";
+import Pill from "../../components/Pill.astro";
+import Carousel from "../../components/Carousel.jsx"; // Componente React para el carrusel
 
 interface Props {
-	entry: CollectionEntry<'work'>;
+  entry: CollectionEntry<"work">;
 }
 
 export const prerender = true;
 // Generación de rutas dinámicas
 export async function getStaticPaths() {
-	const work = await getCollection('work');
-	return work.map((entry: { slug: any; }) => ({
-		params: { slug: entry.slug },
-		props: { entry },
-	}));
+  const work = await getCollection("work");
+  return work.map((entry: { slug: any }) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
 }
 
 const { entry } = Astro.props;
@@ -31,197 +31,251 @@ const carouselImages = entry.data.imgs || [entry.data.preview];
 ---
 
 <BaseLayout title={entry.data.title} description={entry.data.description}>
-	<div class="stack gap-20">
-		<div class="stack gap-15">
-			<ScrollFade client:load className="wrapper">
-				<header>
-					<div class="wrapper stack gap-2">
-						<a class="back-link" href="/work/"><Icon icon="arrow-left" /> Back</a>
-						<Hero title={entry.data.title} align="start">
-							<p>({entry.data.status})</p>
-							<div class="details">
-								<div class="link">
-									<a
-										href={entry.data.url}
-										target="_blank"
-										rel="noopener noreferrer"
-										class="entry-link"
-									>
-										Visit <Icon icon="arrow-right" size="1.2em" />
-									</a>
-								</div>
-								<div class="tags">
-									{entry.data.tags.map((t: unknown) => <Pill>{t}</Pill>)}
-								</div>
-								<p class="description">{entry.data.description}</p>
-							</div>
-						</Hero>
-					</div>
-				</header>
-			</ScrollFade>
-			
-			<ScrollFade client:load className="wrapper">
-				<main class="wrapper">
-					<div class="stack gap-10 content">
-						{/* Carrusel dinámico */}
-						<Carousel client:load images={carouselImages} />
-						<div class="content">
-							<Content />
-						</div>
-					</div>
-				</main>
-			</ScrollFade>
-		</div>
-		
-		<ScrollFade client:load className="wrapper">
-			<ContactCTA />
-		</ScrollFade>
-	</div>
+  <div class="stack gap-20">
+    <div class="stack gap-15">
+      <ScrollFade client:visible className="wrapper">
+        <header>
+          <div class="wrapper stack gap-2">
+            <a class="back-link" href="/work/"
+              ><Icon icon="arrow-left" /> Back</a
+            >
+            <Hero title={entry.data.title} align="start">
+              <p>({entry.data.status})</p>
+              <div class="details">
+                <div class="link">
+                  <a
+                    href={entry.data.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="entry-link"
+                  >
+                    Visit <Icon icon="arrow-right" size="1.2em" />
+                  </a>
+                </div>
+                <div class="tags">
+                  {entry.data.tags.map((t: unknown) => <Pill>{t}</Pill>)}
+                </div>
+                <p class="description">{entry.data.description}</p>
+              </div>
+            </Hero>
+          </div>
+        </header>
+      </ScrollFade>
+      <main class="wrapper">
+        <div class="stack gap-10 content">
+          <ScrollFade client:visible className="carousel">
+            <Carousel client:visible images={carouselImages} />
+          </ScrollFade>
+          <div class="content">
+            <Content />
+          </div>
+            <div class="tech-list">
+              <h2>Tech Stack</h2>
+              <ul class="tech-list">
+                {
+                  entry.data.technologies.map((tech: any) => (
+                    <li class="tech-item">
+                      <Icon
+                        icon={tech}
+                        library={tech.substring(0, 2).toLowerCase()}
+                        size="1.5em"
+                        color="var(--gray-300)"
+                      />
+                      <span>{tech.substring(2)}</span>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+        </div>
+      </main>
+
+      <ScrollFade client:load className="wrapper">
+        <ContactCTA />
+      </ScrollFade>
+    </div>
+  </div>
+
+  <style>
+    header {
+      padding-bottom: 2.5rem;
+      border-bottom: 1px solid var(--gray-800);
+    }
+
+    .back-link {
+      display: none;
+    }
+
+    .entry-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .details {
+      display: flex;
+      flex-direction: column;
+      padding: 0.5rem;
+      gap: 1.5rem;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .tags {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .description {
+      font-size: var(--text-lg);
+      max-width: 54ch;
+    }
+
+    .content {
+      max-width: 65ch;
+      margin-inline: auto;
+    }
+
+    .content > :global(* + *) {
+      margin-top: 1rem;
+    }
+
+    .content :global(h1),
+    .content :global(h2),
+    .content :global(h3),
+    .content :global(h4),
+    .content :global(h5) {
+      margin: 1.5rem 0;
+    }
+
+    .content :global(img) {
+      border-radius: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      background: var(--gradient-subtle);
+      border: 1px solid var(--gray-800);
+    }
+
+    .content :global(blockquote) {
+      font-size: var(--text-lg);
+      font-family: var(--font-brand);
+      font-weight: 600;
+      line-height: 1.1;
+      padding-inline-start: 1.5rem;
+      border-inline-start: 0.25rem solid var(--accent-dark);
+      color: var(--gray-0);
+    }
+
+    .back-link,
+    .entry-link,
+    .content :global(a) {
+      text-decoration: 1px solid underline transparent;
+      text-underline-offset: 0.25em;
+      transition: text-decoration-color var(--theme-transition);
+    }
+
+    .back-link:hover,
+    .back-link:focus,
+    .entry-link:hover,
+    .entry-link:focus,
+    .content :global(a:hover),
+    .content :global(a:focus) {
+      text-decoration-color: currentColor;
+    }
+
+    @media (min-width: 50em) {
+      .back-link {
+        display: block;
+        align-self: flex-start;
+      }
+
+      .details {
+        flex-direction: row;
+        gap: 2.5rem;
+      }
+
+      .content :global(blockquote) {
+        font-size: var(--text-2xl);
+      }
+    }
+
+    /* Ajustes del carrusel */
+    .carousel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .carousel-images img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .left-arrow {
+      left: 10px;
+    }
+
+    .right-arrow {
+      right: 10px;
+    }
+
+    .carousel-indicator {
+      margin-top: 10px;
+      font-size: 1.2rem;
+      color: var(--gray-300);
+    }
+
+    /* Ajustes de las tecnologías */
+
+    .technologies {
+      margin: 1rem 0;
+      text-align: left;
+    }
+
+    .tech-header h3 {
+      font-size: var(--text-md);
+      color: var(--gray-100);
+      margin-bottom: 0.5rem;
+    }
+
+    .tech-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .tech-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: var(--gray-999);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tech-item span {
+      font-size: 0.9rem;
+      color: var(--gray-300);
+    }
+  </style>
 </BaseLayout>
-
-
-<style>
-	header {
-		padding-bottom: 2.5rem;
-		border-bottom: 1px solid var(--gray-800);
-	}
-
-	.back-link {
-		display: none;
-	}
-
-	.entry-link {
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-	}
-
-	.details {
-		display: flex;
-		flex-direction: column;
-		padding: 0.5rem;
-		gap: 1.5rem;
-		justify-content: space-between;
-		align-items: center;
-	}
-
-	.tags {
-		display: flex;
-		gap: 0.5rem;
-	}
-
-	.description {
-		font-size: var(--text-lg);
-		max-width: 54ch;
-	}
-
-	.content {
-		max-width: 65ch;
-		margin-inline: auto;
-	}
-
-	.content > :global(* + *) {
-		margin-top: 1rem;
-	}
-
-	.content :global(h1),
-	.content :global(h2),
-	.content :global(h3),
-	.content :global(h4),
-	.content :global(h5) {
-		margin: 1.5rem 0;
-	}
-
-	.content :global(img) {
-		border-radius: 1.5rem;
-		box-shadow: var(--shadow-sm);
-		background: var(--gradient-subtle);
-		border: 1px solid var(--gray-800);
-	}
-
-	.content :global(blockquote) {
-		font-size: var(--text-lg);
-		font-family: var(--font-brand);
-		font-weight: 600;
-		line-height: 1.1;
-		padding-inline-start: 1.5rem;
-		border-inline-start: 0.25rem solid var(--accent-dark);
-		color: var(--gray-0);
-	}
-
-	.back-link,
-	.entry-link,
-	.content :global(a) {
-		text-decoration: 1px solid underline transparent;
-		text-underline-offset: 0.25em;
-		transition: text-decoration-color var(--theme-transition);
-	}
-
-	.back-link:hover,
-	.back-link:focus,
-	.entry-link:hover,
-	.entry-link:focus,
-	.content :global(a:hover),
-	.content :global(a:focus) {
-		text-decoration-color: currentColor;
-	}
-
-	@media (min-width: 50em) {
-		.back-link {
-			display: block;
-			align-self: flex-start;
-		}
-
-		.details {
-			flex-direction: row;
-			gap: 2.5rem;
-		}
-
-		.content :global(blockquote) {
-			font-size: var(--text-2xl);
-		}
-	}
-
-	/* Ajustes del carrusel */
-	.carousel {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		position: relative;
-		max-width: 800px;
-		margin: 0 auto;
-	}
-
-	.carousel-images img {
-		width: 100%;
-		height: auto;
-		object-fit: cover;
-		border-radius: 10px;
-	}
-
-	.arrow {
-		position: absolute;
-		top: 50%;
-		transform: translateY(-50%);
-		background-color: rgba(0, 0, 0, 0.5);
-		color: white;
-		border: none;
-		border-radius: 50%;
-		padding: 10px;
-		cursor: pointer;
-	}
-
-	.left-arrow {
-		left: 10px;
-	}
-
-	.right-arrow {
-		right: 10px;
-	}
-
-	.carousel-indicator {
-		margin-top: 10px;
-		font-size: 1.2rem;
-		color: var(--gray-300);
-	}
-</style>

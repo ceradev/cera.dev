@@ -1,5 +1,6 @@
 ---
 import Icon from "./Icon.astro";
+import ScrollFade from "./ScrollFade";
 
 type LibraryType = "fa" | "si" | "md" | "ai";
 
@@ -41,6 +42,7 @@ const skills: Record<string, { name: string; library: LibraryType }[]> = {
 <div class="skills-grid">
   {
     Object.entries(skills).map(([category, items]) => (
+      <ScrollFade client:visible className="skill-category">
       <div class="skill-category">
         <h3>{category}</h3>
         <ul>
@@ -51,6 +53,7 @@ const skills: Record<string, { name: string; library: LibraryType }[]> = {
           ))}
         </ul>
       </div>
+      </ScrollFade>
     ))
   }
 </div>

@@ -3,6 +3,14 @@ title: Alphonics
 status: in progress
 publishDate: 2024-05-21 00:00:00
 url: https://github.com/ceradev/alphonics
+technologies: 
+  - FaReact
+  - SiVite
+  - SiSequelize
+  - SiTypescript
+  - SiTailwindcss
+  - SiExpress
+  - SiMysql
 preview: /assets/alphonics/preview.jpg
 imgs:
   [
@@ -48,14 +56,3 @@ With our tools anyone can upload their creations or produce them and be an artis
 If you are looking for a place to discover new music, and to support local artists, Alphonics is the place for you. Better than Spotify, Deezer or Apple Music.
 
 That is because we want to give a different experience to users, to make it possible for them to discover new artists and to support them.
-
-#### Technologies we have used
-
-- React JS
-- Vite.js
-- Sequelize ORM
-- Typescript
-- Tailwind CSS
-- Express.js
-- JWT Token
-- MySQL
