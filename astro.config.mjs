@@ -7,7 +7,7 @@ import vercel from "@astrojs/vercel";
 // https://astro.build/config
 export default defineConfig({
   devToolbar: {
-    enabled: false,
+    enabled: true,
   },
   integrations: [tailwind(), react()],
   output: "server",
